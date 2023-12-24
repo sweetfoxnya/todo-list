@@ -62,15 +62,34 @@ const InputTask = styled.input`
   border-radius: 15px;
   margin-left: 20px;
 `;
+const NameInput = styled.input`
+  width: 400px;
+  height: 30px;
+  font-size: 23px;
+  border-color: #9395D3;
+  border-radius: 10px 10px 10px 10px;
+`;
 function App() {
     useEffect(() => {
         document.body.style.background = '#D6D7EF';
     }, []);
     const {data} = useTasks();
+    const [searchValue, setSearchValue] = useState('')
+    const onSearchInputChange = (event) => {
+        setSearchValue(event.nativeEvent.target.value)
+    }
+   const filterTasks = (data,searchValue) => {
+        return data.filter((el) => {
+            return el.title.toLowerCase().indexOf(searchValue.toLowerCase()) >= 0;
+        });
+    }
+   /* const filteredTasks = filterTasks(data, searchValue);*/
     const renderTaskList = () => {
+
         if (data) {
             const renderItem = (task, index) => {
                 return (
+
                     <ContainerWithTask>
                         <InputTask type={'checkbox'} defaultChecked={task.isDone}/>
                         <TitleTask> {task.title}</TitleTask>
@@ -78,7 +97,7 @@ function App() {
                 )
 
             }
-            return data.map(renderItem);
+            return /*filteredTasks.*/data.map(renderItem);
         }
 
     }
@@ -91,6 +110,7 @@ function App() {
                     <AlertAddTask />
                 </div>
                 <ContainerWithTasks>
+                    <NameInput value={searchValue} onChange={onSearchInputChange}/>
                     {renderTaskList()}
                 </ContainerWithTasks>
             </Container>
