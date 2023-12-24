@@ -18,28 +18,6 @@ const Content = styled.div`
   border-radius: 10px;
   position: relative;
 `;
-
-const Close = styled.span`
-  position: absolute;
-  right: 5px;
-  top: 5px;
-
-  height: 15px;
-  width: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #9395D3;
-  border-radius: 50px;
-
-  &:after {
-    content: 'x';
-    font-size: 12px;
-    line-height: 15px;
-    padding: 0px 0px 2px 0px;
-  }
-`;
-
 export const Modal = (props) => {
 
     const contentComponentClickHandle = (event) => {
@@ -49,7 +27,6 @@ export const Modal = (props) => {
     return (
         <Backdrop>
             <Content onClick={contentComponentClickHandle}>
-                <Close onClick={props.close}/>
                 {props.children}
             </Content>
         </Backdrop>

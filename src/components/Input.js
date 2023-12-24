@@ -28,36 +28,27 @@ const NameButton = styled.button`
   
 `;
 
-export const Input = () => {
+export const Input = ({onCloseAddTask, onAddNewTaskButtonClick}) => {
 
     const inputRef = useRef();
-    const containerRef = useRef();
 
-    const {name, saveName} = useName()
     const [value, setValue] = useState('');
 
-    useEffect(() => {
-        if (name !== undefined) {
-            setValue(name);
-        }
-    }, [name]);
-
-    // Variant 3 - Excellent
     const onInputChange = (event) => {
         let newValue = event.nativeEvent.target.value;
-        console.log(newValue);
-
         setValue(newValue);
     }
 
     const onSaveNameButtonClick = () => {
-        saveName(value);
+        onAddNewTaskButtonClick(value);
+        onCloseAddTask();
     }
 
     return (
-        <Container ref={containerRef}>
+        <Container>
             <NameInput ref={inputRef} value={value} onChange={onInputChange} />
             <NameButton onClick={onSaveNameButtonClick}>Add</NameButton>
+            <NameButton onClick={onCloseAddTask}>Cancel</NameButton>
         </Container>
     );
 }

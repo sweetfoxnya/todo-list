@@ -2,24 +2,14 @@ import {useState} from 'react';
 import styled from 'styled-components'
 import {Modal} from './components/Modal'
 import {Input} from "../Input";
+import {useAddNewTasks} from "../../hooks/useTasks";
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  width: 70px;
-  height: 70px;
-  flex-shrink: 0;
-  background: #9395D3;
-  border-radius: 50px;
-
-`;
 const ButtonAdd = styled.button`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
   flex-shrink: 0;
   background: #9395D3;
   color: white;
@@ -27,6 +17,7 @@ const ButtonAdd = styled.button`
   align-content: center;
   align-items: center;
   font-size: 24px;
+  margin-left: 25px;
   
 `;
 
@@ -54,9 +45,9 @@ const ContainerForForm = styled.div`
   gap: 35px;
 `;
 
-export const Alert = () => {
+export const AlertAddTask = () => {
     const [isModalVisible, setIsModalVisible] = useState(false);
-
+    const {addNewTask} = useAddNewTasks();
 
     const showAlertButtonClick = () => {
         setIsModalVisible(true)
@@ -64,6 +55,10 @@ export const Alert = () => {
 
     const closeAlert = () => {
         setIsModalVisible(false);
+    }
+    const onAddNewTaskButtonClick = (title) => {
+        addNewTask(title)
+
     }
 
     const renderModal = () => {
@@ -77,7 +72,10 @@ export const Alert = () => {
                     <ContainerForTitle>
                         <TitleForButton> Add Task</TitleForButton>
                     </ContainerForTitle>
-                    <Input />
+                    <Input
+                        onCloseAddTask={closeAlert}
+                        onAddNewTaskButtonClick={onAddNewTaskButtonClick}
+                    />
                 </ContainerForForm>
             </Modal>
         );
@@ -86,9 +84,7 @@ export const Alert = () => {
     return (
         <>
             {renderModal()}
-            <Container>
-                <ButtonAdd onClick={showAlertButtonClick}> + </ButtonAdd>
-            </Container>
+            <ButtonAdd onClick={showAlertButtonClick}> + </ButtonAdd>
         </>
     )
 }

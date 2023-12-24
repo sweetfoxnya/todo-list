@@ -1,4 +1,4 @@
-import {CounterActions} from "../dataActions/Counter";
+import {CounterActions} from "../dataActions/Tasks";
 import {useMutation, useQuery, useQueryClient} from "react-query";
 
 export const useCounter = () => {
