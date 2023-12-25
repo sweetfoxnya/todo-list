@@ -35,3 +35,22 @@ export const useAddNewTasks = () => {
         addNewTask: mutate
     }
 }
+
+export const useDeleteTasks = () => {
+    const {data} = useTasks();
+    const queryClient = useQueryClient();
+    const {mutate} = useMutation({
+        mutationFn: (id) => {
+            if (Array.isArray(data)){
+                const newData = data.filter(task => task.id !== id);
+                TaskActions.saveValue(newData);
+            }
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries('tasks');
+        }
+    });
+    return {
+        deleteTask: mutate
+    }
+}

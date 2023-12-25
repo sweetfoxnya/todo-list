@@ -2,6 +2,7 @@ import {useEffect, useState} from 'react';
 import {AlertAddTask} from './components/Alert/AlertAddTask'
 import styled from "styled-components";
 import {useTasks} from "./hooks/useTasks";
+import {AlertDeleteTask} from './components/Alert/AlertDeleteTask'
 
 const Container = styled.div`
     display: flex;
@@ -92,6 +93,7 @@ function App() {
 
                     <ContainerWithTask>
                         <InputTask type={'checkbox'} defaultChecked={task.isDone}/>
+                        <AlertDeleteTask/>
                         <TitleTask> {task.title}</TitleTask>
                     </ContainerWithTask>
                 )
