@@ -64,8 +64,9 @@ export const AlertDeleteTask = () => {
         setIsModalVisible(false);
     }
 
-    const onDeleteNameButtonClick = () => {
-        //deleteTask(id);
+    const onDeleteNameButtonClick = (id) => {
+        console.log('id',id);
+        deleteTask(id);
         closeAlert();
     }
 

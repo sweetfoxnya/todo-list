@@ -36,6 +36,7 @@ export const Input = ({onCloseAddTask, onAddNewTaskButtonClick}) => {
 
     const onInputChange = (event) => {
         let newValue = event.nativeEvent.target.value;
+        console.log('value',newValue)
         setValue(newValue);
     }
 

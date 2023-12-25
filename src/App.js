@@ -84,7 +84,7 @@ function App() {
             return el.title.toLowerCase().indexOf(searchValue.toLowerCase()) >= 0;
         });
     }
-   /* const filteredTasks = filterTasks(data, searchValue);*/
+    /*const filteredTasks = filterTasks(data, searchValue);*/
     const renderTaskList = () => {
 
         if (data) {

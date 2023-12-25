@@ -57,6 +57,7 @@ export const AlertAddTask = () => {
         setIsModalVisible(false);
     }
     const onAddNewTaskButtonClick = (title) => {
+        console.log('title',title)
         addNewTask(title)
     }
 
