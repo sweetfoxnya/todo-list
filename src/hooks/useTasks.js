@@ -43,7 +43,7 @@ export const useDeleteTasks = () => {
         mutationFn: (id) => {
             if (Array.isArray(data)){
                 const newData = data.filter(task => task.id !== id);
-                TaskActions.saveValue(newData);
+                return TaskActions.saveValue(newData);
             }
         },
         onSuccess: () => {

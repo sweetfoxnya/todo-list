@@ -80,6 +80,9 @@ function App() {
         setSearchValue(event.nativeEvent.target.value)
     }
    const filterTasks = (data,searchValue) => {
+        if(!data){
+            return [];
+        }
         return data.filter((el) => {
             return el.title.toLowerCase().indexOf(searchValue.toLowerCase()) >= 0;
         });
@@ -91,9 +94,10 @@ function App() {
             const renderItem = (task, index) => {
                 return (
 
-                    <ContainerWithTask>
+
+                    <ContainerWithTask key={task.id}>
                         <InputTask type={'checkbox'} defaultChecked={task.isDone}/>
-                        <AlertDeleteTask/>
+                        <AlertDeleteTask taskID={task.id}/>
                         <TitleTask> {task.title}</TitleTask>
                     </ContainerWithTask>
                 )
