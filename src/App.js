@@ -79,15 +79,15 @@ function App() {
     const onSearchInputChange = (event) => {
         setSearchValue(event.nativeEvent.target.value)
     }
-   const filterTasks = (data,searchValue) => {
-        if(!data){
+    const filterTasks = (data,searchValue) => {
+        if(!data) {
             return [];
         }
         return data.filter((el) => {
             return el.title.toLowerCase().indexOf(searchValue.toLowerCase()) >= 0;
         });
     }
-    /*const filteredTasks = filterTasks(data, searchValue);*/
+    const filteredTasks = filterTasks(data, searchValue);
     const renderTaskList = () => {
 
         if (data) {
@@ -103,7 +103,7 @@ function App() {
                 )
 
             }
-            return /*filteredTasks.*/data.map(renderItem);
+            return filteredTasks.map(renderItem);
         }
 
     }
