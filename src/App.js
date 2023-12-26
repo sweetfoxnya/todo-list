@@ -3,6 +3,7 @@ import {AlertAddTask} from './components/Alert/AlertAddTask'
 import styled from "styled-components";
 import {useTasks} from "./hooks/useTasks";
 import {AlertDeleteTask} from './components/Alert/AlertDeleteTask'
+import {AlertUpdateTask} from "./components/Alert/AlertUpdateTask";
 
 const Container = styled.div`
     display: flex;
@@ -75,6 +76,7 @@ function App() {
         document.body.style.background = '#D6D7EF';
     }, []);
     const {data} = useTasks();
+    console.log('дата',data)
     const [searchValue, setSearchValue] = useState('')
     const onSearchInputChange = (event) => {
         setSearchValue(event.nativeEvent.target.value)
@@ -96,7 +98,8 @@ function App() {
 
 
                     <ContainerWithTask key={task.id}>
-                        <InputTask type={'checkbox'} defaultChecked={task.isDone}/>
+                        <AlertUpdateTask  title={task.title} taskID={task.id}/>
+
                         <AlertDeleteTask taskID={task.id}/>
                         <TitleTask> {task.title}</TitleTask>
                     </ContainerWithTask>

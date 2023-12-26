@@ -54,3 +54,32 @@ export const useDeleteTasks = () => {
         deleteTask: mutate
     }
 }
+
+export const useUpdateTasks = () => {
+    const {data} = useTasks();
+    const queryClient = useQueryClient();
+    const {mutate} = useMutation({
+        mutationFn: (id,title) => {
+            if (Array.isArray(data)){
+                const newData = data.map(task => {
+                    if (task.id === id) {
+                        return {
+                            title,
+                            isDone: true,
+                            id: Date.now()
+                        };
+                    }
+                    console.log('task',task)
+                    return task;
+                });
+                return TaskActions.saveValue(newData)
+            }
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries('tasks');
+        }
+    });
+    return {
+        updateTask: mutate
+    }
+}
