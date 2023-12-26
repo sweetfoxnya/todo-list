@@ -1,7 +1,8 @@
 import {useState} from 'react';
 import styled from 'styled-components'
 import {Modal} from './components/Modal'
-import {useDeleteTasks} from "../../hooks/useTasks";
+import {Input} from "../Input";
+import {useEditTasks} from "../../hooks/useTasks";
 
 const ButtonAdd = styled.button`
   display: flex;
@@ -16,7 +17,7 @@ const ButtonAdd = styled.button`
   align-content: center;
   align-items: center;
   font-size: 18px;
-  margin-left: 6px;
+  margin-left: 2px;
 `;
 
 const ContainerForTitle = styled.div`
@@ -42,20 +43,10 @@ const ContainerForForm = styled.div`
   flex-direction: column;
   gap: 35px;
 `;
-const NameButton = styled.button`
-  
-  border-radius: 10px 10px 10px 10px;
-  background: #9395D3;
-  width: 360px;
-  height: 35px;
-  flex-shrink: 0;
-  color: #FFF;
-  
-`;
 
-export const AlertDeleteTask = ({taskID}) => {
+export const AlertEditTask = ({id,title}) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
-    const {deleteTask} = useDeleteTasks();
+   // const {editTask} = useEditTasks();
 
     const showAlertButtonClick = () => {
         setIsModalVisible(true)
@@ -64,9 +55,10 @@ export const AlertDeleteTask = ({taskID}) => {
     const closeAlert = () => {
         setIsModalVisible(false);
     }
-
-    const onDeleteNameButtonClick = () => {
-        deleteTask(taskID);
+    const onAddNewTaskButtonClick = () => {
+        console.log('title',title)
+        console.log('id',id)
+       // editTask(id, title);
         closeAlert();
     }
 
@@ -79,10 +71,12 @@ export const AlertDeleteTask = ({taskID}) => {
             <Modal close={closeAlert}>
                 <ContainerForForm>
                     <ContainerForTitle>
-                        <TitleForButton> Delete the task?</TitleForButton>
+                        <TitleForButton> Edit the task?</TitleForButton>
                     </ContainerForTitle>
-                    <NameButton onClick={onDeleteNameButtonClick}>Yes</NameButton>
-                    <NameButton onClick={closeAlert}>No</NameButton>
+                    <Input
+                        onCloseAddTask={closeAlert}
+                        onAddNewTaskButtonClick={onAddNewTaskButtonClick}
+                    />
                 </ContainerForForm>
             </Modal>
         );
@@ -91,7 +85,7 @@ export const AlertDeleteTask = ({taskID}) => {
     return (
         <>
             {renderModal()}
-            <ButtonAdd onClick={showAlertButtonClick}> x </ButtonAdd>
+            <ButtonAdd onClick={showAlertButtonClick}> ✎ </ButtonAdd>
         </>
     )
 }

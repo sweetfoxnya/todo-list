@@ -4,6 +4,7 @@ import styled from "styled-components";
 import {useTasks} from "./hooks/useTasks";
 import {AlertDeleteTask} from './components/Alert/AlertDeleteTask'
 import {AlertUpdateTask} from "./components/Alert/AlertUpdateTask";
+import {AlertEditTask} from "./components/Alert/AlertEditTask";
 
 const Container = styled.div`
     display: flex;
@@ -57,6 +58,7 @@ const TitleTask = styled.div`
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+  margin-left: 6px;
 `;
 const InputTask = styled.input`
   width: 18px;
@@ -95,11 +97,9 @@ function App() {
         if (data) {
             const renderItem = (task, index) => {
                 return (
-
-
                     <ContainerWithTask key={task.id}>
                         <AlertUpdateTask  title={task.title} taskID={task.id}/>
-
+                        <AlertEditTask id={task.id} title={task.title}/>
                         <AlertDeleteTask taskID={task.id}/>
                         <TitleTask> {task.title}</TitleTask>
                     </ContainerWithTask>

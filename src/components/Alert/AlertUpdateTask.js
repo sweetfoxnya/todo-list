@@ -52,8 +52,8 @@ const NameButton = styled.button`
   
 `;
 const InputTask = styled.input`
-  width: 18px;
-  height: 18px;
+  width: 25.5px;
+  height: 25.5px;
   border-radius: 15px;
   margin-left: 20px;
 `;
